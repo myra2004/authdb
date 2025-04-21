@@ -1,35 +1,8 @@
 from fastapi import FastAPI, Request
-import datetime
-from app.router.auth_router import router as auth_router
-from app.router.book import router as book_router
-
-app = FastAPI()
-
-
-requests_in_this_minute= 0
-
-
-@app.middleware("http")
-async def simple_rate_limiter(request: Request,
-                              call_next):
-    global requests_dict
-    request_time = time.time()
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-app.include_router(auth_router)
-app.include_router(book_router)
-
-"""
-from typing import Union
-import time
-from datetime import datetime
-
-from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
-from app.router.auth import router as auth_router
+from datetime import datetime
+from app.router.auth_router import router as auth_router
 from app.router.book import router as book_router
 
 app = FastAPI()
@@ -78,11 +51,8 @@ async def simple_rate_limiter(request: Request, call_next):
 
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+async def root():
+    return {"message": "Hello World"}
 
 app.include_router(auth_router)
 app.include_router(book_router)
-
-
-"""
